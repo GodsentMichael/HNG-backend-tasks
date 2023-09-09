@@ -1,11 +1,12 @@
 const express = require("express")
 const {Router} = express
+const { getQuery } = require("controllers/taskOneCntrl")
 
 const router = Router()
 
-// route GET api/buy-airtime
-// desc  for user to buy airtime
-// access private
-router.get('/task-one')
+// route GET api/task-one
+// desc  to get the queries
+// access public
+router.get('/task-one', getQuery)
 
 module.exports = router
