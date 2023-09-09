@@ -7,6 +7,6 @@ const router = Router()
 // route GET api/task-one
 // desc  to get the queries
 // access public
-router.get('/task-one', getQuery)
+router.get('/', getQuery)
 
 module.exports = router
