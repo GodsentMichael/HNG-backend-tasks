@@ -22,22 +22,15 @@ exports.getQuery = async (req, res) => {
       ];
       const currentDay = daysOfWeek[new Date().getUTCDay()];
   
-      // Get the current UTC time
-      const currentUTCTime = new Date().toISOString();
-      const currentTimeInMilliseconds = Date.parse(currentUTCTime);
-  
-      // Validate UTC time within +/-2 hours (i.e., 7,200,000 milliseconds)
-      const allowedRange = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
-      const isCurrentTimeWithinRange = (currentTimeInMilliseconds - allowedRange) <= currentTimeInMilliseconds <= (currentTimeInMilliseconds + allowedRange);
-  
-      if (!isCurrentTimeWithinRange) {
-        throw new Error('Current time is not within the allowed range of +/-2 hours');
-      }
-  
+        // We have to get the current time in UTC
+      const now = new Date();
+
+      const utcTime = new Date(now.getTime()).toISOString().split(".")[0]+"Z";
+
       const response = {
         slack_name: slackName,
         current_day: currentDay,
-        utc_time: currentUTCTime,
+        utc_time: utcTime,
         track: track,
         github_file_url: githubFileURL,
         github_repo_url: githubRepoURL,
