@@ -6,7 +6,7 @@ exports.getQuery = async (req, res) => {
       const track = req.query.track;
   
       const githubFileURL =
-        "https://github.com/GodsentMichael/HNG-backend-tasks/blob/main/controllers/taskOneCntrl.js";
+        "https://github.com/GodsentMichael/HNG-backend-tasks/blob/main/public/app.js";
       const githubRepoURL =
         "https://github.com/GodsentMichael/HNG-backend-tasks.git";
   
