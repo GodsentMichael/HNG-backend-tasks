@@ -3,6 +3,7 @@ const {
   PersonUpdateSchema,
 } = require("../validations/personValidation");
 const Person = require("../models/person");
+const mongoose = require("mongoose");
 
 //To Create a person resource.
 exports.createPerson = async (req, res) => {
@@ -11,11 +12,11 @@ exports.createPerson = async (req, res) => {
   if (!body.success) {
     return res.status(400).json({ errors: body.error.issues });
   }
-
   try {
     const person = await Person.create({
       ...body.data,
     });
+    console.log("Person=>", person)
     return res.status(201).json({ name:person.name, id:person._id} );
   } catch (error) {
     res.status(500).json(error);
@@ -24,7 +25,6 @@ exports.createPerson = async (req, res) => {
 
 // To get/retrieve the person saved in db.
 exports.getPerson = async (req, res) => {
-//   const name = req.params.name;
   const user_id = req.params.user_id;
   const person = await Person.findOne({ _id: user_id });
 
@@ -44,29 +44,24 @@ exports.updatePerson = async (req, res) => {
   }
 
   try {
-    // const personName = req.params.name;
     const user_id = req.params.user_id;
+
+    if (!user_id || !mongoose.Types.ObjectId.isValid(user_id)) {
+        return res.status(400).json({ error: "Invalid user id" });
+      }
+
     const person = await Person.findOne({_id: user_id})
-    // const person = await Person.findOne({
-    //   name: personName,
-    // });
 
     if (!person) {
       return res.status(404).json({ error: "Person not found" });
     }
 
-    (person.name = body.data.name),
-      (person.age = body.data.age),
-      (person.phone = body.data.phone),
-      (person.address = body.data.address),
-      (person.email = body.data.email);
+    person.name = body.data.name,
+        await person.save();
 
-    person.name = body.data.name;
-
-    const updatedPerson = await person.save();
     return res
       .status(200)
-      .json({ name:person.name, id:person._id, email:person.email, age:person.age, phone:person.phone, address:person.address  });
+      .json({ name:person.name, id:person._id });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal Server Error" });
@@ -76,16 +71,15 @@ exports.updatePerson = async (req, res) => {
 // To Delete a Person
 exports.deletePerson = async (req, res) => {
   try {
-    // const personName = req.params.name;
     const user_id = req.params.user_id;
+
+    if (!user_id || !mongoose.Types.ObjectId.isValid(user_id)) {
+        return res.status(400).json({ error: "Invalid user id" });
+      }
 
     const deletedPerson = await Person.findOneAndDelete({
       _id: user_id,
     });
-
-    // const deletedPerson = await Person.findOneAndDelete({
-    //   name: personName,
-    // });
 
     if (!deletedPerson) {
       return res.status(404).json({ error: "Person not found" });

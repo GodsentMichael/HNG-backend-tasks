@@ -4,14 +4,14 @@ const { createPerson, getPerson, updatePerson, deletePerson } = require("../../c
 
 const router = Router()
 
-// route GET api/
-// desc  to get a person resource
-// access public
-router.get('/:user_id', getPerson)
 // route POST api/
 // desc  to create a new person resource
 // access public
 router.post('/', createPerson)
+// route GET api/
+// desc  to get a person resource
+// access public
+router.get('/:user_id', getPerson)
 // route PUT api/
 // desc  to update a person resource
 // access public

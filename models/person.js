@@ -7,13 +7,6 @@ const PersonSchema = new Schema(
     type: String,
     unique: true
    },
-    email: {
-      type: String,
-      unique: true,
-    },
-    age: String,
-    address: String,
-    phone: String,
   },
   {
     timestamps: true,
