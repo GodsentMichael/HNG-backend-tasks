@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon ./public/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,10 @@
   },
   "_moduleAliases": {
     "routes": "routes",
-    "controllers": "controllers"
+    "controllers": "controllers",
+    "models": "models",
+    "validations": "validations",
+    "public": "public"
   },
   "keywords": [],
   "author": "",
@@ -27,8 +30,12 @@
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "jest": "^29.6.4",
     "module-alias": "^2.2.3",
+    "mongodb-memory-server": "^8.15.1",
     "mongoose": "^7.5.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3",
+    "zod": "^3.22.2"
   }
 }

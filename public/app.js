@@ -3,7 +3,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 
-
 // App Init
 const app = express();
 
@@ -13,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // App Home Route
 app.get("/", (req, res) => {
-  res.send("Welcome to the getQuery API");
+  res.send("Welcome to the HNG TASKs API");
 });
 
 // Register Routes

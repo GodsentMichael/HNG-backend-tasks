@@ -5,12 +5,13 @@ const PersonSchema = new Schema(
   {
    name: {
     type: String,
+    unique: true
    },
     email: {
       type: String,
       unique: true,
     },
-    age: Number,
+    age: String,
     address: String,
     phone: String,
   },
