@@ -24,8 +24,9 @@ exports.createPerson = async (req, res) => {
 
 // To get/retrieve the person saved in db.
 exports.getPerson = async (req, res) => {
-  const name = req.params.name;
-  const person = await Person.findOne({ name: name });
+//   const name = req.params.name;
+  const user_id = req.params.user_id;
+  const person = await Person.findOne({ _id: user_id });
 
   if (!person) {
     return res.status(404).json({ message: "Person not found" });
@@ -43,10 +44,12 @@ exports.updatePerson = async (req, res) => {
   }
 
   try {
-    const personName = req.params.name;
-    const person = await Person.findOne({
-      name: personName,
-    });
+    // const personName = req.params.name;
+    const user_id = req.params.user_id;
+    const person = await Person.findOne({_id: user_id})
+    // const person = await Person.findOne({
+    //   name: personName,
+    // });
 
     if (!person) {
       return res.status(404).json({ error: "Person not found" });
@@ -73,11 +76,16 @@ exports.updatePerson = async (req, res) => {
 // To Delete a Person
 exports.deletePerson = async (req, res) => {
   try {
-    const personName = req.params.name;
+    // const personName = req.params.name;
+    const user_id = req.params.user_id;
 
     const deletedPerson = await Person.findOneAndDelete({
-      name: personName,
+      _id: user_id,
     });
+
+    // const deletedPerson = await Person.findOneAndDelete({
+    //   name: personName,
+    // });
 
     if (!deletedPerson) {
       return res.status(404).json({ error: "Person not found" });
