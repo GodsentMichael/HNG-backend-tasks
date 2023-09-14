@@ -1,6 +1,6 @@
 const express = require("express")
 const {Router} = express
-const { createPerson, getPerson, updatePerson, deletePerson } = require("../../controllers/taskTwoCntrl")
+const { createPerson, getPerson, getAllPersons, updatePerson, deletePerson } = require("../../controllers/taskTwoCntrl")
 
 const router = Router()
 
@@ -12,6 +12,10 @@ router.post('/', createPerson)
 // desc  to get a person resource
 // access public
 router.get('/:user_id', getPerson)
+// route GET api/
+// desc  to get all person resource
+// access public
+router.get('/', getAllPersons)
 // route PUT api/
 // desc  to update a person resource
 // access public

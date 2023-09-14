@@ -36,6 +36,22 @@ exports.getPerson = async (req, res) => {
   return res.status(200).json({ name:person.name, id:person._id });
 };
 
+//To get all persons
+exports.getAllPersons = async (req, res) => {
+  try {
+    const persons = await Person.find({});
+
+    if (!persons) {
+      return res.status(404).json({ error: "No persons found" });
+    }
+
+    return res.status(200).json(persons);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 // To Update Person resource
 exports.updatePerson = async (req, res) => {
   const body = PersonUpdateSchema.safeParse(req.body);
