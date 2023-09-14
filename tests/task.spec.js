@@ -1,4 +1,3 @@
-require("module-alias/register");
 const app = require("../public/app");
 const request = require("supertest");
 const mongoose = require("mongoose");
