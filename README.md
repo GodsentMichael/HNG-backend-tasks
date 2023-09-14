@@ -68,11 +68,7 @@ Before you begin, ensure you have met the following requirements:
 
     ```bash
     {
-  "name": "John Doe",
-  "age": 30,
-  "phone": "1234567890",
-  "address": "123 Main St",
-  "email": "johndoe@example.com"
+  "name": "John Doe"
 }
 
 - Response
@@ -86,7 +82,7 @@ Before you begin, ensure you have met the following requirements:
 
 ### Retrieving a Person
 
-- To retrieve a person by name, make a GET request to the /api/:name endpoint, replacing :name with the person's name.
+- To retrieve a person by name, make a GET request to the /api/:user_id endpoint, replacing :name with the person's name.
 
 - Response
 
@@ -99,13 +95,11 @@ Before you begin, ensure you have met the following requirements:
 
 ### Updating a Person
 
-- To update a person's information, make a PUT request to the /api/:name endpoint, replacing :name with the person's name. Include the fields you want to update in the request body:
+- To update a person's information, make a PUT request to the /api/:user_id endpoint, replacing :name with the person's name. Include the fields you want to update in the request body:
 
     ```bash
     {
-  "age": 35,
-  "phone": "9876543210",
-  "address": "456 Elm St"
+  "name": John Smith
 }
 
 - Response
@@ -113,14 +107,12 @@ Before you begin, ensure you have met the following requirements:
     ```bash
     {
     "id": "6501a3e823d01ba6484659bd",
-    "age": "21",
-    "phone": "9876543210"
-    "address": "456 Elm St"
+    "name": "John Smith"
 }
 
 ### Deleting a Person
 
-- To delete a person by name, make a DELETE request to the /api/:name endpoint, replacing :name with the person's name.
+- To delete a person by name, make a DELETE request to the /api/:user_id endpoint, replacing :name with the person's name.
 
 - Response
 
@@ -131,10 +123,10 @@ Before you begin, ensure you have met the following requirements:
 
 ## API Endpoints
 
-- POST /api/: Create a new person.
-- GET /api/:name: Retrieve a person by name.
-- PUT /api/:name: Update a person's information by name.
-- DELETE /api/:name: Delete a person by name.
+- POST /api/ Create a new person.
+- GET /api/:user_id Retrieve a person by name.
+- PUT /api/:user_id Update a person's information by name.
+- DELETE /api/:user_id Delete a person by name.
 
 
 ## Testing
