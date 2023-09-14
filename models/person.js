@@ -5,7 +5,6 @@ const PersonSchema = new Schema(
   {
    name: {
     type: String,
-    unique: true
    },
   },
   {

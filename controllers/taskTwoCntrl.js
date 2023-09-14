@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 //To Create a person resource.
 exports.createPerson = async (req, res) => {
   const body = PersonSchema.safeParse(req.body);
+  console.log("body=>", body)
 
   if (!body.success) {
     return res.status(400).json({ errors: body.error.issues });
