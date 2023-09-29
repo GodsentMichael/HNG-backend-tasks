@@ -17,28 +17,28 @@ const upload = multer({ storage: storage });
 
 // UPLOAD CONTROLLER FUNCTION
 const uploadVideo = async (req, res) => {
-  try {
+    try {
+      const filename = req.file ? req.file.filename : undefined;
   
-
-    const filename = req.file.filename;
-    if (!req.file) {
-      return res.status(400).json({ error: "File upload error" });
+      if (filename === undefined) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+  
+      const video = new Video({ filename });
+  
+      await video.save();
+  
+      if (!video) {
+        return res.status(400).json({ error: "Error saving video" });
+      }
+  
+      res.status(200).json({ message: "Video record uploaded successfully", video });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    const video = new Video({ filename });
-
-    await video.save();
-
-    if (!video) {
-        return res.status(400).json({ error: "Error saving video" })
-    }
-
-    res.status(200).json({ message: "Video record uploaded successfully", video });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
+  };
+  
 
   
 // VIDEO RETRIEVAL CONTROLLER FUNCTION
@@ -104,7 +104,7 @@ const getAllVideos = async (req, res) => {
         serverVideos.push({
           filename: file,
           url: videoUrl,
-          size: fileStats.size,
+          size: fileSize,
           createdAt: fileStats.birthtime,
         });
       }
@@ -121,4 +121,24 @@ const getAllVideos = async (req, res) => {
   }
 };
 
-module.exports = { upload, uploadVideo, getVideo, getAllVideos };
+//DELETE VIDEO CONTROLLER FUNCTION
+const deleteVideo = async (req, res) => {
+  try {
+    const videoName = req.params.videoName;
+    const filePath = path.join("uploads", videoName);
+    console.log("FILEPATH=>", filePath);
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: "Video file not found" });
+    }
+
+    fs.unlinkSync(filePath);
+
+    res.status(200).json({ message: "Video file deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = { upload, uploadVideo, getVideo, getAllVideos, deleteVideo };

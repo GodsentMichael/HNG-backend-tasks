@@ -1,6 +1,6 @@
 const express = require("express");
 const { Router } = express;
-const { uploadVideo, upload, getVideo, getAllVideos } = require("../../controllers/taskFive");
+const { uploadVideo, upload, getVideo, getAllVideos, deleteVideo } = require("../../controllers/taskFive");
 
 const router = Router();
 
@@ -8,5 +8,6 @@ const router = Router();
 router.post('/upload', upload.single('video'), uploadVideo);
 router.get('/:videoName', getVideo)
 router.get('/', getAllVideos)
+router.delete('/:videoName', deleteVideo)
 
 module.exports = router;
