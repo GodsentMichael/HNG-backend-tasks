@@ -32,6 +32,11 @@ const uploadVideo = async (req, res) => {
         return res.status(400).json({ error: "Error saving video" });
       }
   
+      const uploadsFolder = 'uploads';
+      if(!fs.existsSync(uploadsFolder)){
+        fs.mkdirSync(uploadsFolder)
+      }
+
       res.status(200).json({ message: "Video record uploaded successfully", video });
     } catch (error) {
       console.error(error);
@@ -78,6 +83,10 @@ const getAllVideos = async (req, res) => {
 
     const serverVideos = [];
 
+    const uploadsFolder = 'uploads';
+    if(!fs.existsSync(uploadsFolder)){
+      fs.mkdirSync(uploadsFolder)
+    }
     const directoryPath = path.join("uploads");
     const files = fs.readdirSync(directoryPath);
 
