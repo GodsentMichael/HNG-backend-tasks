@@ -79,14 +79,11 @@ const getVideo = (req, res) => {
 const getAllVideos = async (req, res) => {
   try {
     
-    const baseVideoUrl = "http://localhost:8000/api/";
+    // const baseVideoUrl = "http://localhost:8000/api/";
+    const baseVideoUrl = "https://hng-query-api.onrender.com/api/";
 
     const serverVideos = [];
 
-    const uploadsFolder = 'uploads';
-    if(!fs.existsSync(uploadsFolder)){
-      fs.mkdirSync(uploadsFolder)
-    }
     const directoryPath = path.join("uploads");
     const files = fs.readdirSync(directoryPath);
 
