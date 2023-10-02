@@ -44,7 +44,34 @@ const uploadVideo = async (req, res) => {
     }
   };
   
+//HANDLING CHUNKS
 
+const uploadChunks = async (req, res) => {
+  try {
+  const chunk = req.file.buffer; 
+
+  const videoId = req.body.videoId;
+  console.log("VIDEOID=>", videoId)
+
+  const videoFilePath = `uploads/${videoId}.mp4`;
+
+   // Check if the video file exists; if not, create it
+   if (!fs.existsSync(videoFilePath)) {
+    // Create a new file with the video ID as the filename
+    fs.writeFileSync(videoFilePath, chunk);
+  } else {
+    // If the file already exists, append the chunk to it
+    fs.appendFileSync(videoFilePath, chunk);
+  }
+
+  //
+     // Send a response to acknowledge the receipt of the chunk
+     res.status(200).json({ message: 'Chunk received and processed successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
   
 // VIDEO RETRIEVAL CONTROLLER FUNCTION
 const getVideo = (req, res) => {
@@ -147,4 +174,4 @@ const deleteVideo = async (req, res) => {
   }
 };
 
-module.exports = { upload, uploadVideo, getVideo, getAllVideos, deleteVideo };
+module.exports = { upload, uploadVideo,uploadChunks,  getVideo, getAllVideos, deleteVideo };

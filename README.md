@@ -144,4 +144,15 @@ Before you begin, ensure you have met the following requirements:
 
 - This project is licensed under the MIT License.
 
+Thanks for your info!
 
+Now let's approach them step by step, and write the codes for it's functionslity using nodejs and express and MongoDb.
+Staring with the first:
+
+Receive and Store Chunks:
+
+Create an endpoint in your Node.js backend to receive video chunks. This endpoint should handle streaming data.
+As chunks arrive, append them to the corresponding video file on your server, identified by the video ID.
+You may need to use libraries like multer for handling file uploads and streaming.
+
+https://deepgram.com/learn/transcribe-videos-nodejs
